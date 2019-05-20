@@ -1,0 +1,7 @@
+    1.MainActivity          The welcome page.
+    2.UserLoginActivity     The login page. Its function is to achieve user login
+    3.RegisterActivity      The register page. Its function is to achieve
+    4.HomepageForMActivity  User interface
+    5.HomepageForMActivity  Administrator interface
+    6.SQLite                Database-related files
+    7.ResetPassword         Files associated with the password reset function

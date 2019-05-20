@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="email_suffix">
+        <item>\@aol.com</item>
+        <item>\@ask.com</item>
+        <item>\@gmail.com</item>
+        <item>\@googlemail.com</item>
+        <item>\@hotmail.com</item>
+        <item>\@jucbe.com.cn</item>
+        <item>\@live.com</item>
+        <item>\@mail.com</item>
+        <item>\@msn.cn</item>
+        <item>\@qq.com</item>
+        <item>\@sina.com</item>
+        <item>\@sogou.com</item>
+        <item>\@tom.com</item>
+        <item>\@yahoo.com</item>
+        <item>\@yeah.net</item>
+        <item>\@0355.net</item>
+        <item>\@126.com</item>
+        <item>\@163.com</item>
+        <item>\@163.net</item>
+        <item>\@263.net</item>
+        <item>\@3721.net</item>
+    </string-array>
+</resources>

@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">Parking System</string>
+    <string name="main_title">Welcome\nTo\nPark System</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="main_btn_into">Welcome</string>
+    <string name="register_title">REGISTRATION</string>
+    <string name="register_btn_affirm">Register</string>
+    <string name="register_btn_reset">Reset</string>
+    <string name="reset_title">Reset Password</string>
+    <string name="reset_btn_reset">Reset</string>
+    <string name="reset_initem_password">Please enter your new password：</string>
+    <string name="reset_ver_initem_username">Please confirm your user name</string>
+    <string name="reset_ver_initem_code">Please enter the verification code</string>
+    <string name="login_title">User Login</string>
+    <string name="login_radio_user">User</string>
+    <string name="login_redio_master">Master</string>
+    <string name="login_btn_into">LOGIN</string>
+    <string name="login_btn_toregister">Register</string>
+    <string name="login_btn_toreset">Forgot Password?</string>
+    <string name="homepage_title">WELECOM</string>
+    <string name="homepage_txt_place">PLACE</string>
+    <string name="homepage_txt_my">MY</string>
+    <string name="homepage_txt_pay">PAY</string>
+    <string name="fragment_title_my">My Information</string>
+    <string name="fragment_title_shopping">Shopping Car</string>
+    <string name="fragment_title_order">Parking Stall</string>
+
+    <string name="initem_username">Username：</string>
+    <string name="initem_password">Password：</string>
+    <string name="initem_phone">Phone：</string>
+    <string name="initem_name">Name：</string>
+    <string name="initem_sex">Sex：</string>
+    <string name="initem_age">Age：</string>
+    <string name="initem_e_mail">E-mail：</string>
+    <string name="initem_licenseNumber">LicenseNumber：</string>
+
+
+    <string name="filechoose_app_name">FileDirChoose</string>
+    <string name="filechoose_record">Record</string>
+    <string name="filechoose_stop">Stop</string>
+    <string name="filechoose_description_info">Info</string>
+    <string name="filechoose_permission_request">This sample needs permission for camera and audio recording.</string>
+    <string name="filechoose_camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="filechoose_intro_message">sss</string>
+    <string name="filechoose_already">您已经选中该文件夹</string>
+    <string name="filechoose_sure">确定</string>
+
+</resources>

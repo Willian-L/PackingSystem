@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="50dp"
+    android:orientation="vertical"
+    tools:context=".LoginAndRegister.RegisterActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="@string/register_title"
+        android:textSize="36dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:gravity="right"
+            style="@style/LinerLayout_register_item">
+
+            <TextView
+                style="@style/Text_item"
+                android:text="@string/initem_username" />
+
+            <TextView
+                style="@style/Text_item"
+                android:text="@string/initem_password" />
+
+            <TextView
+                style="@style/Text_item"
+                android:text="@string/initem_phone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            style="@style/LinerLayout_register_item">
+
+            <EditText
+                android:id="@+id/edtReUsername"
+                style="@style/Edit_input"
+                android:inputType="text"
+                android:maxLength="16" />
+
+            <EditText
+                android:id="@+id/edtRePassword"
+                style="@style/Edit_input"
+                android:inputType="textPassword"
+                android:maxLength="16" />
+
+            <EditText
+                android:id="@+id/edtRePhone"
+                style="@style/Edit_input"
+                android:inputType="phone"
+                android:maxLength="11" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="9">
+
+
+        <TextView
+            style="@style/Text_item"
+            android:text="@string/initem_licenseNumber"
+            android:layout_width="0dp"
+            android:layout_weight="5"/>
+
+        <EditText
+            android:id="@+id/edtLicenseNumber"
+            style="@style/Edit_input"
+            android:layout_weight="4"
+            android:maxLength="7"
+            android:layout_width="0dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"></LinearLayout>
+
+    <Button
+        android:id="@+id/btnRegister"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:text="@string/register_btn_affirm"/>
+
+    <Button
+        android:id="@+id/btnReset"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:onClick="reset"
+        android:text="@string/register_btn_reset"/>
+
+
+</LinearLayout>

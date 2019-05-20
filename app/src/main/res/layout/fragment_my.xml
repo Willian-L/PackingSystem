@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserHomepage.Fragment.MyFragment">
+
+    <RelativeLayout style="@style/Fragment_rel_title">
+
+        <TextView
+            android:id="@+id/myTxt_title"
+            style="@style/Fragment_txt_title"
+            android:text="@string/fragment_title_my" />
+
+        <ImageButton
+            android:id="@+id/userIbtn_edit"
+            style="@style/ButtonStyle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="#10000000"
+            app:srcCompat="@android:drawable/ic_menu_edit" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/userImg_photo"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:layout_centerInParent="true"
+            app:srcCompat="@mipmap/ic_mine" />
+
+        <ImageButton
+            android:id="@+id/userIbtn_camera"
+            style="@style/my_imgBtn"
+            android:layout_marginTop="25dp"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <ImageButton
+            android:id="@+id/userIbtn_album"
+            style="@style/my_imgBtn"
+            android:layout_below="@id/userIbtn_camera"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp">
+
+        <LinearLayout
+            style="@style/LinerLayout_my_show"
+            android:layout_width="wrap_content"
+            android:gravity="right">
+
+            <TextView
+                style="@style/Text_item"
+                android:text="@string/initem_name" />
+
+            <TextView
+                style="@style/Text_item"
+                android:text="@string/initem_sex" />
+
+            <TextView
+                style="@style/Text_item"
+                android:text="@string/initem_age" />
+
+            <TextView
+                style="@style/Text_item"
+                android:text="@string/initem_phone" />
+
+            <TextView
+                style="@style/Text_item"
+                android:text="@string/initem_e_mail" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinerLayout_my_show"
+            android:layout_width="match_parent"
+            android:gravity="left">
+
+            <EditText
+                android:id="@+id/userMy_name"
+                style="@style/Edit_My"
+                android:inputType="text"
+                android:maxLength="16" />
+
+            <RadioGroup
+                android:id="@+id/userMy_Radsex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <RadioButton
+                    android:id="@+id/user_radBtnman"
+                    style="@style/my_radBtn"
+                    android:text="Man" />
+
+                <RadioButton
+                    android:id="@+id/user_radBtnwoman"
+                    style="@style/my_radBtn"
+                    android:text="Woman" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/userMy_sex"
+                style="@style/Edit_My"
+                android:inputType="text"
+                android:visibility="visible" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/userTxt_age"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:enabled="false"
+                    android:gravity="right|center_vertical"
+                    android:text="0"
+                    android:textSize="20dp" />
+
+                <SeekBar
+                    android:id="@+id/userSB_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:max="99"
+                    android:min="18"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/userMy_phone"
+                style="@style/Edit_My"
+                android:inputType="phone"
+                android:maxLength="11" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/userMy_email"
+                    style="@style/Edit_show"
+                    android:layout_height="match_parent"
+                    android:inputType="text"
+                    android:enabled="true"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txt_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22dp"
+                    android:enabled="false" />
+
+                <Spinner
+                    android:id="@+id/mySpi_email"
+                    android:layout_width="320dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:entries="@array/email_suffix"
+                    android:overlapAnchor="false"
+                    android:spinnerMode="dropdown"
+                    android:textSize="22dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            >
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:weightSum="4"
+        android:gravity="center">
+
+
+        <TextView
+            style="@style/Text_item"
+            android:text="@string/initem_licenseNumber"
+            android:layout_width="0dp"
+            android:layout_weight="2" />
+
+        <EditText
+            android:id="@+id/userMy_licenseNumber"
+            style="@style/Edit_My"
+            android:inputType="text"
+            android:layout_width="0dp"
+            android:layout_weight="2" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/my_btnModify"
+        style="@style/My_ButtonStyle"
+        android:layout_marginTop="20dp"
+        android:text="modify" />
+
+    <Button
+        android:id="@+id/my_btnCancel"
+        style="@style/My_ButtonStyle"
+        android:layout_marginTop="10dp"
+        android:text="cancel" />
+
+
+</LinearLayout>

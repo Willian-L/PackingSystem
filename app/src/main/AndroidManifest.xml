@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.william.parksystem">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.william.parksystem.MasterHomepage.Fragment.Derive.ChooseFileActivity"></activity>
+        <activity android:name="com.william.parksystem.LoginAndRegister.UserLoginActivity" />
+        <activity android:name="com.william.parksystem.ResetPassword.ResetVerActivity" />
+        <activity android:name="com.william.parksystem.ResetPassword.ResetPasswordActivity" />
+        <activity android:name="com.william.parksystem.LoginAndRegister.RegisterActivity" />
+        <activity android:name="com.william.parksystem.MasterHomepage.HomepageForMActivity" />
+        <activity android:name="com.william.parksystem.UserHomepage.HomepageForUActivity">
+            <intent-filter>
+                <action android:name="android.media.action.IMAGE_CAPTURE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.william.parksystem.UI.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- 7.0以上摄像头调取 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.william.parksystem.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>

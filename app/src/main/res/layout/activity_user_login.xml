@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".LoginAndRegister.UserLoginActivity">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"></LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:text="@string/login_title"
+        android:textSize="36dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/edtUsername"
+        style="@style/Login_editText"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/hint_username"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/edtPassword"
+        style="@style/Login_editText"
+        android:hint="@string/hint_password"
+        android:inputType="textPassword" />
+
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/loginCb_Remember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:text="Remember Me"
+            android:textColor="#A0000000" />
+
+        <TextView
+            android:id="@+id/register"
+            style="@style/Login_underBtn"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:gravity="right"
+            android:onClick="register"
+            android:text="@string/login_btn_toregister" />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnLogin"
+        style="@style/ButtonStyle"
+        android:layout_width="250dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/login_btn_into" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"></LinearLayout>
+
+    <TextView
+        android:id="@+id/forgot"
+        style="@style/Login_underBtn"
+        android:layout_marginBottom="20dp"
+        android:gravity="left"
+        android:onClick="forgot"
+        android:text="@string/login_btn_toreset" />
+
+</LinearLayout>

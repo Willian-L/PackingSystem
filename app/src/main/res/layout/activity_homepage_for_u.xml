@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".UserHomepage.HomepageForUActivity">
+    
+    <LinearLayout
+        android:id="@+id/user_content_Layout"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/user_layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:background="#10000000"
+        android:orientation="horizontal"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp">
+
+        <RadioGroup
+            android:id="@+id/rg_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rad_place"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1"
+                android:text="@string/homepage_txt_place"
+                android:textSize="15sp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:button="@null"
+                android:drawableTop="@drawable/tab_menu_pay"
+                />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:background="#20000000" />
+
+            <RadioButton
+                android:id="@+id/rad_pay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1"
+                android:text="@string/homepage_txt_pay"
+                android:textSize="15sp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:button="@null"
+                android:drawableTop="@drawable/tab_menu_pay"/>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:background="#20000000" />
+
+            <RadioButton
+                android:id="@+id/rad_my"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:layout_weight="1"
+                android:text="@string/homepage_txt_my"
+                android:textSize="15sp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:button="@null"
+                android:drawableTop="@drawable/tab_menu_mine"/>
+
+        </RadioGroup>
+    </LinearLayout>
+</LinearLayout>
