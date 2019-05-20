@@ -42,13 +42,15 @@ public class HomepageForUActivity extends AppCompatActivity implements View.OnCl
         Log.i("user",intent.getStringExtra("username"));
 
         manager = getSupportFragmentManager();
-        Bundle bundle = new Bundle();
         PlaceFragment plFragment = new PlaceFragment();
-        bundle.putString("username", user.getUsername());
-        plFragment.setArguments(bundle);
         transaction = manager.beginTransaction();
         transaction.add(R.id.user_content_Layout, plFragment);
         transaction.commit();
+
+        Bundle bundle = new Bundle();
+        Log.i("user",user.getUsername());
+        bundle.putString("username", user.getUsername());
+        plFragment.setArguments(bundle);
 
     }
 
@@ -84,8 +86,8 @@ public class HomepageForUActivity extends AppCompatActivity implements View.OnCl
                 bundle1.putString("username", user.getUsername());
                 payFragment.setArguments(bundle1);
                 transaction.replace(R.id.user_content_Layout, payFragment);
-                rb_place.setActivated(true);
-                rb_pay.setActivated(false);
+                rb_place.setActivated(false);
+                rb_pay.setActivated(true);
                 rb_my.setActivated(false);
                 break;
             case R.id.rad_my:

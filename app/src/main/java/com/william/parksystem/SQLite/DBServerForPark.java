@@ -106,11 +106,13 @@ public class DBServerForPark {
         String time = null;
         Cursor cursor = null;
         // Get a cursor object
-        cursor = (db.query(DB_TABLE, new String[]{KEY_TIME},
+        cursor = db.query(DB_TABLE, new String[]{KEY_TIME},
                 KEY_PLACE + "='" + place + "'",
-                null, null, null, null));
+                null, null, null, null);
         if (cursor.getCount() != 0) {
-            time = cursor.getString(cursor.getColumnIndex("startTime"));
+            while (cursor.moveToNext()) {
+                time = cursor.getString(cursor.getColumnIndex("startTime"));
+            }
         }
         return time;
     }
@@ -119,9 +121,9 @@ public class DBServerForPark {
         boolean result = false;
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_PLACE, place);
-        contentValues.put(KEY_LICENSE_NUMBER,licenseNumber);
+        contentValues.put(KEY_LICENSE_NUMBER, licenseNumber);
         contentValues.put(KEY_TIME, time);
-        Log.i("upplace",place+licenseNumber+time);
+        Log.i("upplace", place + licenseNumber + time);
         int n = db.update(DB_TABLE, contentValues, KEY_LICENSE_NUMBER + "='" + licenseNumber + "'", null);
         if (n == 1) {
             result = true;
@@ -135,9 +137,7 @@ public class DBServerForPark {
     public boolean pay(String licenseNumber, double price) {
         boolean result = false;
         ContentValues contentValues = new ContentValues();
-        String string = null;
-        contentValues.put(KEY_PLACE, string);
-        contentValues.put(KEY_TIME, string);
+        contentValues.put(KEY_PLACE, 0);
         contentValues.put(KEY_PRICE, price);
         int n = db.update(DB_TABLE, contentValues, KEY_LICENSE_NUMBER + "='" + licenseNumber + "'", null);
         if (n == 1) {

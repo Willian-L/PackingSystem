@@ -3,6 +3,7 @@ package com.william.parksystem.UserHomepage.Fragment;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class PayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pay,null);
+        View view = inflater.inflate(R.layout.fragment_pay, null);
 
         init(view);
 
@@ -45,17 +46,20 @@ public class PayFragment extends Fragment {
         DBServerForU dbServerForU = new DBServerForU(getContext());
         dbServerForU.open();
         Cursor cursor = dbServerForU.selectLicense(user.getUsername());
-        park.setLicenseNumber(cursor.getString(cursor.getColumnIndex("licenseNumber")));
+        while (cursor.moveToNext()) {
+            park.setLicenseNumber(cursor.getString(cursor.getColumnIndex("licenseNumber")));
+            Log.i("up", park.getLicenseNumber());
+        }
         dbServerForU.close();
 
         final DBServerForPark dbServerForPark = new DBServerForPark(getContext());
         dbServerForPark.open();
         int place = dbServerForPark.selectPlaceByLN(park.getLicenseNumber());
-        if (place > 0){
+        if (place > 0) {
             startTime = dbServerForPark.selectTime(place);
         }
 
-        if (startTime != null){
+        if (startTime != null) {
             ll_no.setVisibility(View.GONE);
             ll_yes.setVisibility(View.VISIBLE);
             txt_Time.setText(startTime);
@@ -64,16 +68,17 @@ public class PayFragment extends Fragment {
             Calendar calendar = Calendar.getInstance();
             int hour_now = calendar.get(Calendar.HOUR_OF_DAY);
             int total_time = hour_now - hour;
-            txt_ToTime.setText(total_time+"H");
-            price = total_time * 2 ;
+            txt_ToTime.setText(total_time + "H");
+            price = total_time * 2;
             park.setPrice(price);
-            txt_price.setText("¥"+price);
+            txt_price.setText("¥" + price);
         }
 
         btn_pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dbServerForPark.pay(park.getLicenseNumber(),park.getPrice())){
+                Log.i("LN", park.getLicenseNumber()+park.getPrice());
+                if (dbServerForPark.pay(park.getLicenseNumber(), park.getPrice())) {
                     ll_yes.setVisibility(View.GONE);
                     txt_price.setText(null);
                     txt_Time.setText(null);
@@ -88,7 +93,7 @@ public class PayFragment extends Fragment {
         return view;
     }
 
-    private void init(View view){
+    private void init(View view) {
         ll_yes = view.findViewById(R.id.linlay_yes);
         ll_no = view.findViewById(R.id.linlay_no);
         txt_Time = view.findViewById(R.id.txt_entryTime);

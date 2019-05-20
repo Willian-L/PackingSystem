@@ -39,7 +39,6 @@ public class PlaceFragment extends Fragment {
         String username = bundle.getString("username");
         Log.i("getUser",username);
 
-        if (bundle != null) {
             user.setUsername(username);
             DBServerForU dbServerForU = new DBServerForU(getContext());
             dbServerForU.open();
@@ -49,7 +48,6 @@ public class PlaceFragment extends Fragment {
                 Log.i("up",park.getLicenseNumber());
             }
             dbServerForU.close();
-        }
 
         btnLooking.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +59,7 @@ public class PlaceFragment extends Fragment {
 
                 for (int i = 0; i < 100; i++) {
                     ++place;
-                    if (!dbServerForPark.selectPlace(place)) {
+                    if (dbServerForPark.selectPlace(place)) {
                         if (dbServerForPark.insert(park.getLicenseNumber())) {
                             park.setPlace(place);
                             Log.i("place", "insert License Number");
@@ -69,8 +67,6 @@ public class PlaceFragment extends Fragment {
                         }
                     }
                 }
-
-                dbServerForPark.close();
 
                 if (place != 0) {
                     Calendar calendar = Calendar.getInstance();
@@ -87,11 +83,11 @@ public class PlaceFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Parking is full!\nPlease wait for a moment", Toast.LENGTH_SHORT).show();
                 }
+
+                dbServerForPark.close();
             }
         });
 
-
         return view;
     }
-
 }
