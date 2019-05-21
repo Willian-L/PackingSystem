@@ -78,6 +78,7 @@ public class PayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Log.i("LN", park.getLicenseNumber()+park.getPrice());
+                dbServerForPark.open();
                 if (dbServerForPark.pay(park.getLicenseNumber(), park.getPrice())) {
                     ll_yes.setVisibility(View.GONE);
                     txt_price.setText(null);
@@ -85,6 +86,7 @@ public class PayFragment extends Fragment {
                     txt_ToTime.setText(null);
                     ll_no.setVisibility(View.VISIBLE);
                 }
+                dbServerForPark.close();
             }
         });
 

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserHomepage.Fragment.PlaceFragment">
+    tools:context=".UserHomepage.Fragment.PlaceFragment"
+    android:orientation="vertical">
 
 
     <RelativeLayout style="@style/Fragment_rel_title">
@@ -17,10 +18,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="600dp"
         android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:orientation="vertical"
+        android:gravity="center"
+        >
 
         <TextView
             android:id="@+id/txtPlace_PInfo"
@@ -28,16 +30,17 @@
             android:layout_height="wrap_content"
             android:hint="Parking information"
             android:textSize="30dp"
-            android:gravity="center"
-            android:visibility="gone"/>
+            android:gravity="center" />
 
         <Button
             android:id="@+id/btn_looking"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_gravity="center"
             android:text="Looking for\nparking Spaces" />
-
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

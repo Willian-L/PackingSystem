@@ -39,7 +39,7 @@ public class ResetVerActivity extends AppCompatActivity {
 
         inti();
 
-        imageView.setImageBitmap(IdentifyingCode.getInstance().createBitmap());
+        renewal();
 
         final Intent intent = getIntent();
         fromLogin = intent.getStringExtra("username");
@@ -52,13 +52,10 @@ public class ResetVerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 codeStr = edtCode.getText().toString().trim();
-                Log.i("code",codeStr);
-                Log.i("code",realCode);
 //                showResetDialog();
                 if (edtiReUser != null) {
                     if (edtCode != null) {
                         codeStr = edtCode.getText().toString().trim();
-                        Log.i("code", codeStr);
                         if (realCode.equals(codeStr)) {
                             showResetDialog();
                             if (phoneInput != null) {
@@ -113,7 +110,8 @@ public class ResetVerActivity extends AppCompatActivity {
         IdentifyingCode identifyingCode = IdentifyingCode.getInstance();
         Bitmap bitmap = identifyingCode.createBitmap();
         imageView.setImageBitmap(bitmap);
-        realCode = identifyingCode.getCode().toLowerCase();
+        realCode = identifyingCode.getCode().toLowerCase().toString();
+        Log.i("real",realCode+"");
     }
 
     private void showResetDialog() {
@@ -127,7 +125,6 @@ public class ResetVerActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         EditText editPhone = dialogView.findViewById(R.id.edtDiophone);
                         phoneInput = editPhone.getText().toString().trim();
-                        Log.i("ver", phoneInput);
                         if (phoneInput != null) {
                             user.setUsername(edtiReUser.getText().toString().trim());
                             user.setPhone(phoneInput);

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -19,6 +20,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,7 @@ import com.william.parksystem.Information.User;
 import com.zxy.tiny.Tiny;
 import com.zxy.tiny.callback.FileWithBitmapCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -51,17 +54,17 @@ public class MyFragment extends Fragment {
 
     ImageView imgPhoto;
     ImageButton ibtn_edit, ibtn_camera, ibtn_album;
-    EditText edtName, edtSex, edtPhone, edtEmail, edtLicenseNumber;
+    EditText edtName, edtSex, edtPhone, edtEmail, edtLinNum;
     Button btnModify, btnCancel;
+    User user = new User();
     TextView txt_title;
     RadioGroup radSex;
     TextView txtAge, txtEmail;
     SeekBar sbAge;
     Spinner spEmail;
 
-    User user = new User();
+    private String sex;
 
-    private String sex = null;
     private String age = null;
 
     private String email_suffix = null;
@@ -69,6 +72,7 @@ public class MyFragment extends Fragment {
     private String email_suf = null;
 
     private String photoPath = null;
+
     private Uri getPhotoURI = null;
     private Uri photoURI = null;
 
@@ -103,10 +107,10 @@ public class MyFragment extends Fragment {
                 user.setEmail(cursor.getString(cursor.getColumnIndex("email")));
                 txtEmail.setText(user.getEmail());
                 user.setLicenseNumber(cursor.getString(cursor.getColumnIndex("licenseNumber")));
-                edtLicenseNumber.setText(user.getLicenseNumber());
+                edtLinNum.setText(user.getLicenseNumber());
                 user.setPhoto(cursor.getString(cursor.getColumnIndex("photo")));
                 photoPath = user.getPhoto();
-                if (photoPath!=null) {
+                if (photoPath != null) {
                     getPhotoURI = Uri.parse(photoPath);
                     photoURI = getPhotoURI;
                     imgPhoto.setImageURI(getPhotoURI);
@@ -179,22 +183,22 @@ public class MyFragment extends Fragment {
                 final String name = edtName.getText().toString().trim();
                 final String phone = edtPhone.getText().toString().trim();
                 final String email_input = edtEmail.getText().toString().trim() + email_suffix;
-                final String address = edtLicenseNumber.getText().toString().trim();
-                final String sex = edtSex.getText().toString().trim();
+                final String licenseNum = edtLinNum.getText().toString().trim();
                 final String age = txtAge.getText().toString().trim();
                 String name_db = user.getName();
                 String phone_db = user.getPhone();
                 String email_db = user.getEmail();
-                String address_db = user.getLicenseNumber();
+                String linNum_db = user.getLicenseNumber();
                 String age_db = user.getAge();
                 String sex_db = user.getSex();
                 if (name.equals(name_db) &&
                         phone.equals(phone_db) &&
                         email_input.equals(email_db) &&
-                        address.equals(address_db) &&
+                        licenseNum.equals(linNum_db) &&
                         age.equals(age_db) &&
-                        sex.equals(sex_db)) {
-                    if (photoURI.equals(getPhotoURI)) {
+                        sex.equals(sex_db) ||
+                        sex == null) {
+                    if (photoURI == null || photoURI.equals(getPhotoURI)) {
                         Toast.makeText(getContext(), "Content unchanged", Toast.LENGTH_SHORT).show();
                         closeEdit();
                     } else {
@@ -233,7 +237,7 @@ public class MyFragment extends Fragment {
                             "\nAge：" + age +
                             "\nPhone：" + phone +
                             "\nE-mail：" + email_input +
-                            "\nAddress：" + address);
+                            "\nAddress：" + licenseNum);
                     builder.setPositiveButton("Yes",
                             new DialogInterface.OnClickListener() {
                                 @Override
@@ -243,7 +247,7 @@ public class MyFragment extends Fragment {
                                     user.setAge(age);
                                     user.setPhone(phone);
                                     user.setEmail(email_input);
-                                    user.setLicenseNumber(address);
+                                    user.setLicenseNumber(licenseNum);
                                     String photoU = photoURI.toString();
                                     user.setPhoto(photoU);
                                     updateDB();
@@ -280,8 +284,8 @@ public class MyFragment extends Fragment {
                                 txtAge.setText(user.getAge());
                                 edtPhone.setText(user.getPhone());
                                 txtEmail.setText(user.getEmail());
-                                edtLicenseNumber.setText(user.getLicenseNumber());
-                                if (getPhotoURI == null){
+                                edtLinNum.setText(user.getLicenseNumber());
+                                if (getPhotoURI == null) {
                                     imgPhoto.setImageDrawable(null);
                                 }
                                 imgPhoto.setImageURI(getPhotoURI);
@@ -307,11 +311,13 @@ public class MyFragment extends Fragment {
             public void onClick(View v) {
                 if (PackageManager.PERMISSION_GRANTED == ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA)) {
                     try {
+                        //有权限,去打开摄像头
                         takePhoto();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 } else {
+                    //提示用户开户权限   拍照和读写sd卡权限
                     String[] perms = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA};
                     ActivityCompat.requestPermissions(getActivity(), perms, MY_ADD_CASE_CALL_PHONE);
 
@@ -323,6 +329,8 @@ public class MyFragment extends Fragment {
         ibtn_album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //"点击了相册");
+                //  6.0之后动态申请权限 SD卡写入权限
                 if (ContextCompat.checkSelfPermission(getActivity(),
                         Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         != PackageManager.PERMISSION_GRANTED) {
@@ -347,12 +355,12 @@ public class MyFragment extends Fragment {
         txtAge.setEnabled(true);
         txtEmail.setVisibility(View.GONE);
         edtPhone.setEnabled(true);
-        edtLicenseNumber.setEnabled(true);
+        edtLinNum.setEnabled(true);
         edtName.setBackgroundColor(Color.parseColor(backcolor));
         txtAge.setBackgroundColor(Color.parseColor(backcolor));
         edtPhone.setBackgroundColor(Color.parseColor(backcolor));
         edtEmail.setBackgroundColor(Color.parseColor(backcolor));
-        edtLicenseNumber.setBackgroundColor(Color.parseColor(backcolor));
+        edtLinNum.setBackgroundColor(Color.parseColor(backcolor));
         btnModify.setVisibility(View.VISIBLE);
         btnCancel.setVisibility(View.VISIBLE);
         ibtn_album.setVisibility(View.VISIBLE);
@@ -366,14 +374,14 @@ public class MyFragment extends Fragment {
         edtName.setEnabled(false);
         txtAge.setEnabled(false);
         edtPhone.setEnabled(false);
-        edtLicenseNumber.setEnabled(false);
+        edtLinNum.setEnabled(false);
         imgPhoto.setEnabled(false);
         edtName.setBackground(null);
         txtAge.setBackground(null);
         edtSex.setBackground(null);
         edtPhone.setBackground(null);
         edtEmail.setBackground(null);
-        edtLicenseNumber.setBackground(null);
+        edtLinNum.setBackground(null);
         btnModify.setVisibility(View.GONE);
         btnCancel.setVisibility(View.GONE);
         ibtn_camera.setVisibility(View.GONE);
@@ -402,7 +410,9 @@ public class MyFragment extends Fragment {
         }
     }
 
+    //调取系统摄像头的请求码
     private static final int MY_ADD_CASE_CALL_PHONE = 6;
+    //打开相册的请求码
     private static final int MY_ADD_CASE_CALL_PHONE2 = 7;
 
     private void takePhoto() throws IOException {
@@ -415,13 +425,18 @@ public class MyFragment extends Fragment {
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
             photoURI = Uri.fromFile(file);
         } else {
-            photoURI = FileProvider.getUriForFile(getActivity(), "com.william.reservationsystem.fileprovider", file);
+            /**
+             * 7.0 调用系统相机拍照不再允许使用Uri方式，应该替换为FileProvider
+             * 并且这样可以解决MIUI系统上拍照返回size为0的情况
+             */
+            photoURI = FileProvider.getUriForFile(getActivity(), "com.william.parksystem.fileprovider", file);
         }
         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
         intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
         startActivityForResult(intent, 1);
     }
 
+    // 在sd卡中创建一保存图片（原图和缩略图共用的）文件夹
     private File createFileIfNeed(String fileName) throws IOException {
         String fileA = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath() + "/photo";
         File fileJA = new File(fileA);
@@ -440,6 +455,7 @@ public class MyFragment extends Fragment {
      * 打开相册
      */
     private void choosePhoto() {
+        //这是打开系统默认的相册(就是你系统怎么分类,就怎么显示,首先展示分类列表)
         Intent picture = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(picture, 2);
     }
@@ -462,6 +478,8 @@ public class MyFragment extends Fragment {
                     e.printStackTrace();
                 }
             } else {
+                //"权限拒绝");
+                // 这里可以给用户一个提示,请求权限被拒绝了
             }
         }
 
@@ -470,6 +488,8 @@ public class MyFragment extends Fragment {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 choosePhoto();
             } else {
+                //"权限拒绝");
+                // 这里可以给用户一个提示,请求权限被拒绝了
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -482,6 +502,7 @@ public class MyFragment extends Fragment {
         if (requestCode == 1 && resultCode != Activity.RESULT_CANCELED) {
             String state = Environment.getExternalStorageState();
             if (!state.equals(Environment.MEDIA_MOUNTED)) return;
+            // 把原图显示到界面上
             Tiny.FileCompressOptions options = new Tiny.FileCompressOptions();
             Tiny.getInstance().source(readpic()).asFile().withOptions(options).compress(new FileWithBitmapCallback() {
                 @Override
@@ -503,13 +524,17 @@ public class MyFragment extends Fragment {
                 });
                 Log.i("path", photoPath + "");
             } catch (Exception e) {
+                //"上传失败");
             }
         }
     }
 
+    /**
+     * 从保存原图的地址读取图片
+     */
     private String fileName() {
         SimpleDateFormat timesdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String FileTime = timesdf.format(new Date());
+        String FileTime = timesdf.format(new Date()).toString();//获取系统时间
         String filename = FileTime.replace(":", "");
         return filename;
     }
@@ -550,7 +575,7 @@ public class MyFragment extends Fragment {
         edtSex = view.findViewById(R.id.userMy_sex);
         edtPhone = view.findViewById(R.id.userMy_phone);
         edtEmail = view.findViewById(R.id.userMy_email);
-        edtLicenseNumber = view.findViewById(R.id.userMy_licenseNumber);
+        edtLinNum = view.findViewById(R.id.userMy_licenseNumber);
         btnModify = view.findViewById(R.id.my_btnModify);
         btnCancel = view.findViewById(R.id.my_btnCancel);
         ibtn_camera = view.findViewById(R.id.userIbtn_camera);

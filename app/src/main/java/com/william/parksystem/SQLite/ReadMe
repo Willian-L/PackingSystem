@@ -1,6 +1,0 @@
-    1.DBHelper.java       Extends SQLiteOpenHelper to build a database of users, including the table of master and the table user
-    2.DBServerForM.java   Instantiate the SQLiteDatabase. And we can manipulate data of administrator to achieve things like insert, delete, select and updata
-    3.DBServerForU.java   Instantiate the SQLiteDatabase. And we can manipulate data of user to achieve things like insert, delete, select and updata
-    4.Master.java         The constructor about the administrator's
-    5.User.java           The constructor about the user's
-    6.Userinfo            Parent class for administrator's and user's information

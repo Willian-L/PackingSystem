@@ -39,7 +39,7 @@ public class HomepageForUActivity extends AppCompatActivity implements View.OnCl
 
         Intent intent = getIntent();
         user.setUsername(intent.getStringExtra("username"));
-        Log.i("user",intent.getStringExtra("username"));
+        Log.i("getUser", user.getUsername()+"");
 
         manager = getSupportFragmentManager();
         PlaceFragment plFragment = new PlaceFragment();
@@ -48,7 +48,6 @@ public class HomepageForUActivity extends AppCompatActivity implements View.OnCl
         transaction.commit();
 
         Bundle bundle = new Bundle();
-        Log.i("user",user.getUsername());
         bundle.putString("username", user.getUsername());
         plFragment.setArguments(bundle);
 

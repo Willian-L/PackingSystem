@@ -58,9 +58,6 @@ public class DBServerForPark {
         contentValues.put(KEY_LICENSE_NUMBER, licenseNumber);
         if (db.insert(DB_TABLE, null, contentValues) > 0) {
             result = true;
-            Toast.makeText(context, "Insert succeeded", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Insert failed", Toast.LENGTH_SHORT).show();
         }
         return result;
     }
@@ -139,8 +136,12 @@ public class DBServerForPark {
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_PLACE, 0);
         contentValues.put(KEY_PRICE, price);
+
+        if (db !=null){
+            System.out.println("test");
+        }
         int n = db.update(DB_TABLE, contentValues, KEY_LICENSE_NUMBER + "='" + licenseNumber + "'", null);
-        if (n == 1) {
+        if (n != 1) {
             result = true;
             Log.i("sql", "Update database succeeded");
         } else {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@mipmap/ic_shopping_on" android:state_activated="true"></item>
-    <item android:drawable="@mipmap/ic_shopping" android:state_activated="false"></item>
+    <item android:drawable="@mipmap/ic_place_on" android:state_activated="true"></item>
+    <item android:drawable="@mipmap/ic_place" android:state_activated="false"></item>
 </selector>

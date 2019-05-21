@@ -37,17 +37,26 @@ public class PlaceFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         String username = bundle.getString("username");
-        Log.i("getUser",username);
 
-            user.setUsername(username);
-            DBServerForU dbServerForU = new DBServerForU(getContext());
-            dbServerForU.open();
-            Cursor cursor = dbServerForU.selectLicense(user.getUsername());
-            while (cursor.moveToNext()){
-                park.setLicenseNumber(cursor.getString(cursor.getColumnIndex("licenseNumber")));
-                Log.i("up",park.getLicenseNumber());
-            }
-            dbServerForU.close();
+        user.setUsername(username);
+        DBServerForU dbServerForU = new DBServerForU(getContext());
+        dbServerForU.open();
+        Cursor cursor = dbServerForU.selectLicense(user.getUsername());
+        while (cursor.moveToNext()) {
+            park.setLicenseNumber(cursor.getString(cursor.getColumnIndex("licenseNumber")));
+        }
+        dbServerForU.close();
+
+        DBServerForPark dbServerForPark = new DBServerForPark(getContext());
+        dbServerForPark.open();
+        int getPlace = dbServerForPark.selectPlaceByLN(park.getLicenseNumber());
+        if (getPlace > 0){
+            txtPInfo.setText("Your parking space is\nNo." + getPlace);
+        }else {
+            btnLooking.setVisibility(View.VISIBLE);
+            txtPInfo.setVisibility(View.GONE);
+        }
+        dbServerForPark.close();
 
         btnLooking.setOnClickListener(new View.OnClickListener() {
             @Override

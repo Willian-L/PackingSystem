@@ -44,9 +44,11 @@ public class UserLoginActivity extends AppCompatActivity {
         sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
         if (sp.getBoolean("ISCHECK", false)) {
             checkRemember.setChecked(true);
-            edtUsername.setText(sp.getString("USER_NAME", ""));
+            String username = sp.getString("USER_NAME", "");
+            edtUsername.setText(username);
             edtPassword.setText(sp.getString("PASSWORD", ""));
             Intent intent = new Intent(UserLoginActivity.this, HomepageForUActivity.class);
+            intent.putExtra("username", username);
             UserLoginActivity.this.startActivity(intent);
         }
 

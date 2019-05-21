@@ -33,7 +33,7 @@
                 android:id="@+id/rad_place"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:paddingTop="10dp"
+                android:paddingTop="6dp"
                 android:paddingBottom="10dp"
                 android:layout_weight="1"
                 android:text="@string/homepage_txt_place"
@@ -41,7 +41,7 @@
                 android:textColor="#ffffff"
                 android:gravity="center"
                 android:button="@null"
-                android:drawableTop="@drawable/tab_menu_pay"
+                android:drawableTop="@drawable/tab_menu_place"
                 />
 
             <View
