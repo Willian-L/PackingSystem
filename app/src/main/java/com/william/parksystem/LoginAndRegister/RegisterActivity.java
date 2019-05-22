@@ -39,19 +39,19 @@ public class RegisterActivity extends AppCompatActivity {
                 /*
                 Determine if the username, password, and phone number match the rules
                  */
-                if (!username.matches("^[A-Za-z0-9]+$")) {                              // Determine whether the username is composed of letters and numbers
+                if (!username.matches("^[A-Za-z0-9]+$")) {
                     Toast.makeText(getApplicationContext(),
                             "Username must be alphanumeric!", Toast.LENGTH_SHORT).show();
-                } else if (!username.matches("^.{6,16}$")) {                            // Determine whether the username is 4 to 16 characters
+                } else if (!username.matches("^.{6,16}$")) {
                     Toast.makeText(getApplicationContext(),
-                            "Username must be at least 4 digits", Toast.LENGTH_SHORT).show();
-                } else if (!password.matches("^[A-Za-z0-9]+$")) {                       // Determine whether the password is composed of letters and numbers
+                            "Username must be at least 6 digits", Toast.LENGTH_SHORT).show();
+                } else if (!password.matches("^[A-Za-z0-9]+$")) {
                     Toast.makeText(getApplicationContext(),
                             "Password must be alphanumeric!", Toast.LENGTH_SHORT).show();
-                } else if (!password.matches("^.{6,16}$")) {                            // Determine whether the username is 6 to 16 characters
+                } else if (!password.matches("^.{6,16}$")) {
                     Toast.makeText(getApplicationContext(),
                             "Password must be at least 6 digits", Toast.LENGTH_SHORT).show();
-                } else if (!phone.matches("^[1][3,5,6,7,8,9][0-9]{9}$")) {                  // Determine whether the telephone number consists of the first digit of 1 and the second digit of 3 or 5 or 6 or 8.Are there nine other Numbers besides the first two
+                } else if (!phone.matches("^[1][3,5,6,7,8,9][0-9]{9}$")) {
                     Toast.makeText(getApplicationContext(),
                             "The phone number you entered is incorrect!", Toast.LENGTH_SHORT).show();
                 } else if (!licenseNumber.matches("^[A-Z0-9]{5}$")) {

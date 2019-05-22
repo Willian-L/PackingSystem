@@ -51,16 +51,12 @@ public class UserLoginActivity extends AppCompatActivity {
             intent.putExtra("username", username);
             UserLoginActivity.this.startActivity(intent);
         }
-
-        Log.i("edt", "edtPassword:" + edtPassword.getText() + "edtUsername:" + edtUsername.getText());
-
         try {
             Intent intent = getIntent();
             String username = intent.getStringExtra("username");
             edtUsername.setText(username);
         } catch (Exception e) {
         }
-
         checkRemember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -75,30 +71,21 @@ public class UserLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int result = 0;
-
                 String username = edtUsername.getText().toString().trim();
                 String password = edtPassword.getText().toString().trim();
-
                 boolean hasUsernameValue = false;
                 if (!username.equals("")) {
                     hasUsernameValue = true;
                 }
-
                 boolean hasPasswordValue = false;
                 if (!password.equals("")) {
                     hasPasswordValue = true;
                 }
-
                 if (hasUsernameValue && hasPasswordValue) {
-                    // Get the username and password
                     user.setUsername(edtUsername.getText().toString().trim());
                     user.setPassword(edtPassword.getText().toString().trim());
                     DBServerForU dbServerForU = new DBServerForU(getApplicationContext());
                     dbServerForU.open();
-                    Log.i("eab", edtUsername.getText().toString() + edtPassword.getText().toString());
-                        /*
-                        Determine whether the username and password match the one in the database
-                         */
                     result = dbServerForU.login(user.getUsername(), user.getPassword());
                     switch (result) {
                         case 2:
@@ -133,7 +120,6 @@ public class UserLoginActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void showRegisterDialog() {

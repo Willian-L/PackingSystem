@@ -63,9 +63,7 @@ public class PlaceFragment extends Fragment {
             public void onClick(View v) {
                 DBServerForPark dbServerForPark = new DBServerForPark(getContext());
                 dbServerForPark.open();
-
                 int place = 0;
-
                 for (int i = 0; i < 100; i++) {
                     ++place;
                     if (dbServerForPark.selectPlace(place)) {
@@ -76,7 +74,6 @@ public class PlaceFragment extends Fragment {
                         }
                     }
                 }
-
                 if (place != 0) {
                     Calendar calendar = Calendar.getInstance();
                     int hour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -92,7 +89,6 @@ public class PlaceFragment extends Fragment {
                 } else {
                     Toast.makeText(getActivity(), "Parking is full!\nPlease wait for a moment", Toast.LENGTH_SHORT).show();
                 }
-
                 dbServerForPark.close();
             }
         });

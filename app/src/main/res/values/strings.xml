@@ -33,7 +33,7 @@
     <string name="initem_sex">Sex：</string>
     <string name="initem_age">Age：</string>
     <string name="initem_e_mail">E-mail：</string>
-    <string name="initem_licenseNumber">LicenseNumber：</string>
+    <string name="initem_licenseNumber">License Number：</string>
 
 
     <string name="filechoose_app_name">FileDirChoose</string>

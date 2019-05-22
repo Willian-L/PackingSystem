@@ -68,11 +68,11 @@ public class HomepageForUActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         transaction = manager.beginTransaction();
+        Bundle bundle = new Bundle();
+        bundle.putString("username", user.getUsername());
         switch (v.getId()) {
             case R.id.rad_place:
-                Bundle bundle = new Bundle();
                 PlaceFragment plFragment = new PlaceFragment();
-                bundle.putString("username", user.getUsername());
                 plFragment.setArguments(bundle);
                 transaction.replace(R.id.user_content_Layout, plFragment);
                 rb_place.setActivated(true);
@@ -80,20 +80,16 @@ public class HomepageForUActivity extends AppCompatActivity implements View.OnCl
                 rb_my.setActivated(false);
                 break;
             case R.id.rad_pay:
-                Bundle bundle1 = new Bundle();
                 PayFragment payFragment = new PayFragment();
-                bundle1.putString("username", user.getUsername());
-                payFragment.setArguments(bundle1);
+                payFragment.setArguments(bundle);
                 transaction.replace(R.id.user_content_Layout, payFragment);
                 rb_place.setActivated(false);
                 rb_pay.setActivated(true);
                 rb_my.setActivated(false);
                 break;
             case R.id.rad_my:
-                Bundle bundle2 = new Bundle();
-                bundle2.putString("username", user.getUsername());
                 MyFragment myFragment = new MyFragment();
-                myFragment.setArguments(bundle2);
+                myFragment.setArguments(bundle);
                 transaction.replace(R.id.user_content_Layout, myFragment);
                 rb_my.setActivated(true);
                 rb_place.setActivated(false);
@@ -102,7 +98,5 @@ public class HomepageForUActivity extends AppCompatActivity implements View.OnCl
         }
         transaction.commit();
     }
-
-
 }
 

@@ -93,7 +93,6 @@ public class MyFragment extends Fragment {
         DBServerForU dbServerForU = new DBServerForU(getContext());
         dbServerForU.open();
         Cursor cursor = dbServerForU.selectByUsername(user.getUsername());
-
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 user.setName(cursor.getString(cursor.getColumnIndex("name")));

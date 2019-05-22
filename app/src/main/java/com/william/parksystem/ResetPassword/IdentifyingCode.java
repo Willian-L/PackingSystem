@@ -11,10 +11,6 @@ public class IdentifyingCode {
 
     private static IdentifyingCode IdentifyingCode;
 
-    private static final char[] CHARS = {
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-    };
-
     public static IdentifyingCode getInstance() {
         if (IdentifyingCode == null) {
             IdentifyingCode = new IdentifyingCode();
@@ -22,6 +18,9 @@ public class IdentifyingCode {
         return IdentifyingCode;
     }
 
+    private static final char[] CHARS = {
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+    };
     private static final int CODE_LENGTH = 4;
     private static final int FONT_SIZE = 50;
     private static final int LINE_NUMBER = 5;

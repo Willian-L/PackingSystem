@@ -58,7 +58,6 @@ public class PayFragment extends Fragment {
         if (place > 0) {
             startTime = dbServerForPark.selectTime(place);
         }
-
         if (startTime != null) {
             ll_no.setVisibility(View.GONE);
             ll_yes.setVisibility(View.VISIBLE);
